@@ -5,8 +5,9 @@ import Toolbar from '@mui/material/Toolbar';
 import { Avatar, Button, IconButton, Typography, createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
 import StoreIcon from '@mui/icons-material/Store';
-
+import avatar from "./static/images/I.png";
 import { grey } from '@mui/material/colors';
+import { StyledBadge } from './styleUtily/style';
 
 const darkTheme = createTheme({
   palette: {
@@ -43,7 +44,13 @@ function App() {
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <IconButton sx={{ p: 0 }}>
-                <Avatar alt="Ivan Dmit" src="/static/images/I.png" />
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  variant="dot"
+                >
+                  <Avatar alt="Ivan Dmit" src={avatar} sx={{ width: 50, height: 50 }} />
+                </StyledBadge>
               </IconButton>
             </Box>
           </Toolbar>
