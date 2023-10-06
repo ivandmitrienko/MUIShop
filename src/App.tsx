@@ -43,7 +43,7 @@ function App() {
             </Box>
             <Box sx={{ flexGrow: 0 }}>
               <IconButton sx={{ p: 0 }}>
-                <Avatar alt="Ivan Dmit" src="images/2023-07-27_14-27.png" />
+                <Avatar alt="Ivan Dmit" src="/static/images/I.png" />
               </IconButton>
             </Box>
           </Toolbar>
