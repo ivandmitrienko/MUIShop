@@ -7,9 +7,15 @@ function App() {
   const [data, setData] = useState<IData[]>([])
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    fetch('https://fakestoreapi.com/products', {
+      mode: 'no-cors',
+      method: "get",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
       .then(res => res.json())
-      .then((data:IData[]) => setData(data))
+      .then((data: IData[]) => setData(data))
   }, []);
 
   return (
