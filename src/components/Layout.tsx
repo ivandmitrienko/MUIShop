@@ -17,8 +17,10 @@ export const Layout: FC<IProps> = ({ data }) => {
                 fullWidth
                 sx={{ backgroundColor: "none", mb: '1.5rem' }}
             />
-            <Grid container sx={{height:'100%'}}>
-                {data.map((el) => <Item key={el.id} {...el}/>)}
+            <Grid container justifyContent="center" spacing={2}>
+                {data.map((el) => <Grid item >
+                    <Item key={el.id} {...el}/>
+                </Grid>)}
             </Grid>
         </Container>
     )

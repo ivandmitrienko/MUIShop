@@ -23,12 +23,16 @@ const darkTheme = createTheme({
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
-export const Header: React.FC = () => {
+interface ICartOpen{
+    cartOpen:()=>void
+}
+
+export const Header = ({ cartOpen }:ICartOpen) => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={darkTheme}>
                 <AppBar position="static">
-                    <Toolbar disableGutters={false}>
+                    <Toolbar>
                         <StoreIcon color="secondary" sx={{ display: { xs: 'none', sm: 'block', paddingBottom: '2px' }, mr: 1 }} />
                         <Typography variant="h6" component="div" sx={{ display: { xs: 'none', sm: 'block' } }}>
                             MUI Shop
@@ -86,7 +90,7 @@ export const Header: React.FC = () => {
                                     <Avatar alt="Ivan Dmit" src={avatar} sx={{ width: 50, height: 50 }} />
                                 </StyledBadge>
                             </IconButton>
-                            <IconButton color="primary" aria-label="add to shopping cart">
+                            <IconButton color="primary" aria-label="add to shopping cart" onClick={cartOpen}>
                                 <AddShoppingCartIcon sx={{ color: 'white', ml: '5px' }} />
                             </IconButton>
                         </Box>
