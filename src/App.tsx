@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { Layout } from './components/Layout';
 import { IData } from './types/types';
 import { Basket } from './components/Basket';
+import Footer from './components/Footer';
 
 function App() {
   const [data, setData] = useState<IData[]>([])
@@ -30,6 +31,7 @@ function App() {
       cartOpen = {isCartOpen}
       closeCart={toggleDrawer}
       />
+      <Footer/>
     </>
   )
 }
