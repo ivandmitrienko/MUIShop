@@ -6,3 +6,5 @@ export interface IData {
     description: string,
     image: string
 }
+
+export type productID =Pick<IData,"id">

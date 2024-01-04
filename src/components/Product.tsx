@@ -3,8 +3,12 @@ import { IData } from '../types/types';
 import Card from '@mui/material/Card';
 import { Button, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { useProduct } from '../Context/ProductContextProvider';
 
-export const Item = (el: IData) => {
+export const Product = (el: IData) => {
+
+    const { addProduct } = useProduct()
+
     return (
         <div style={{ height: "100%" }}>
             <Card sx={{
@@ -36,7 +40,7 @@ export const Item = (el: IData) => {
                     <small><del>{(Number(el.price) * 1.25).toFixed(2)}</del></small>
                 </CardContent>
                 <CardActions sx={{ position: 'absolute', top: "82%", right: 5 }}>
-                    <Button variant="outlined">
+                    <Button variant="outlined" onClick={()=>addProduct(el)}>
                         <AddShoppingCartIcon />
                     </Button>
                 </CardActions>
