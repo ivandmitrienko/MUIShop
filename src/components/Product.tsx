@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { IData } from '../types/types';
 import Card from '@mui/material/Card';
 import { Button, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
@@ -7,18 +7,15 @@ import { useProduct } from '../Context/ProductContextProvider';
 
 export const Product = (el: IData) => {
 
-    const [button, setButton] = useState<boolean>(true)
-
     const { addProduct, removeProduct, products } = useProduct()
 
     const addProductToCart = (el: IData) => {
         addProduct(el);
-        setButton(!button)
+        el.handleClose()
     }
 
     const removeProductFromCart = (id: number) => {
         removeProduct(id);
-        setButton(!button)
     }
 
     let checkProductInStorage = products.some((e) => e.id === el.id)
@@ -54,7 +51,7 @@ export const Product = (el: IData) => {
                     <small><del>{(Number(el.price) * 1.25).toFixed(2)}</del></small>
                 </CardContent>
                 <CardActions sx={{ position: 'absolute', top: "82%", right: 5 }}>
-                    {button && !(checkProductInStorage)?
+                    {!(checkProductInStorage) ?
                         <Button variant="outlined" onClick={() => addProductToCart(el)}>
                             <AddShoppingCartIcon />
                         </Button> :

@@ -50,12 +50,19 @@ export const ProductContextProvider = ({ children }: IProductContextProvider) =>
   const removeCountOfProduct = (id: number) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: prev.products.map((el) => el.id === id && el.count ? { ...el, count: Number(el.count) - 1 } : { ...el })
+      products: prev.products.map((el) => el.id === id && (Number(el.count) > 1) ? { ...el, count: Number(el.count) - 1 } : { ...el })
     }))
   }
 
   return (
-    <ProductContext.Provider value={{ addProduct, removeProduct, addCountOfProduct, removeCountOfProduct, ...products }}>
+    <ProductContext.Provider
+      value={{
+        addProduct,
+        removeProduct,
+        addCountOfProduct,
+        removeCountOfProduct,
+        ...products
+      }}>
       {children}
     </ProductContext.Provider>
   )

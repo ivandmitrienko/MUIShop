@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import { Avatar, Button, IconButton, Typography, createTheme } from '@mui/material';
+import { Avatar, Badge, Button, IconButton, Typography, createTheme } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { ThemeProvider } from '@emotion/react';
 import StoreIcon from '@mui/icons-material/Store';
@@ -10,6 +10,7 @@ import avatar from "../static/images/I.png";
 import { grey } from '@mui/material/colors';
 import { StyledBadge } from '../styleUtily/style';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { useProduct } from '../Context/ProductContextProvider';
 
 const darkTheme = createTheme({
     palette: {
@@ -23,11 +24,14 @@ const darkTheme = createTheme({
 
 const pages = ['Products', 'Pricing', 'Blog'];
 
-interface ICartOpen{
-    cartOpen:()=>void
+interface ICartOpen {
+    cartOpen: () => void
 }
 
-export const Header = ({ cartOpen }:ICartOpen) => {
+export const Header = ({ cartOpen }: ICartOpen) => {
+
+    const { products } = useProduct()
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <ThemeProvider theme={darkTheme}>
@@ -41,7 +45,6 @@ export const Header = ({ cartOpen }:ICartOpen) => {
                             {pages.map((page) => (
                                 <Button
                                     key={page}
-                                    // onClick={handleCloseNavMenu}
                                     sx={{ my: 2, color: 'blue', fontSize: '14px', display: 'block' }}
                                 >
                                     {page}
@@ -54,7 +57,6 @@ export const Header = ({ cartOpen }:ICartOpen) => {
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
-                                // onClick={handleOpenNavMenu}
                                 color="inherit"
                                 sx={{ p: '0' }}
                             >
@@ -81,7 +83,7 @@ export const Header = ({ cartOpen }:ICartOpen) => {
                             MUI Shop
                         </Typography>
                         <Box sx={{ display: 'flex', flexGrow: 0, alignItems: 'center' }}>
-                            <IconButton sx={{ p: 0, display: { xl: 'block', lg: 'block', xs:'none' }, }}>
+                            <IconButton sx={{ p: 0, display: { xl: 'block', lg: 'block', xs: 'none' }, }}>
                                 <StyledBadge
                                     overlap="circular"
                                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -91,7 +93,12 @@ export const Header = ({ cartOpen }:ICartOpen) => {
                                 </StyledBadge>
                             </IconButton>
                             <IconButton color="primary" aria-label="add to shopping cart" onClick={cartOpen}>
-                                <AddShoppingCartIcon sx={{ color: 'white', ml: '5px' }} />
+                                <Badge
+                                    color='error'
+                                    badgeContent={products.reduce((acc, cur) => { return acc + Number(cur.count) }, 0)}
+                                >
+                                    <AddShoppingCartIcon sx={{ color: 'white', ml: '5px' }} />
+                                </Badge>
                             </IconButton>
                         </Box>
                     </Toolbar>

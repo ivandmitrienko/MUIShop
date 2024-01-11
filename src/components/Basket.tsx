@@ -1,4 +1,4 @@
-import { Divider, Drawer, IconButton, List, ListItem, ListItemText } from '@mui/material';
+import { Divider, Drawer, IconButton, List, ListItem, ListItemText, Typography } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { useProduct } from '../Context/ProductContextProvider';
 import ItemBasket from './ItemBasket';
@@ -28,6 +28,12 @@ export const Basket = ({ closeCart, cartOpen }: IDrawer) => {
         </ListItem>
         <Divider/>
         {products.map((e)=><ItemBasket {...e}/>)}
+        <Divider/>
+        <Typography variant='h6' sx={{textAlign:'center'}}>
+          {products.length ? 
+          <div>Total price:{products.reduce((acc, cur) => { return acc + Number(cur.price) *Number(cur.count)},0)}</div>:
+          'Empty'}
+        </Typography>
       </List>
     </Drawer>
   )

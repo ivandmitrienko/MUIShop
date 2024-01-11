@@ -1,6 +1,6 @@
 import React from 'react'
 import { IData } from '../types/types'
-import { Card, CardContent, CardMedia, Divider, IconButton, ListItem, ListItemText, Typography } from '@mui/material'
+import { Card, CardContent, CardMedia, IconButton, ListItem, ListItemText, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -15,7 +15,7 @@ export default function ItemBasket(el: IData) {
             <ListItem key={el.id} secondaryAction={<IconButton aria-label="delete" size="small" onClick={() => removeProduct(el.id)}>
                 <DeleteIcon fontSize="small" color='error' />
             </IconButton>}>
-                <Card sx={{ maxWidth: 200, display: "flex" }}>
+                <Card sx={{ width: 200, display: "flex" }}>
                     <CardMedia
                         sx={{ height: 100, width: 100, backgroundSize: 'contain' }}
                         image={el.image}
@@ -48,7 +48,6 @@ export default function ItemBasket(el: IData) {
                     <RemoveCircleOutlineIcon />
                 </IconButton>
             </ListItem>
-            <Divider />
         </>
     )
 }
