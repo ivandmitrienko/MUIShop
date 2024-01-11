@@ -7,3 +7,5 @@ export interface IData {
     image: string,
     count?:number
 }
+
+export type productID = (id: number) => void

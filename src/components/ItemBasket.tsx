@@ -8,11 +8,11 @@ import { useProduct } from '../Context/ProductContextProvider';
 
 export default function ItemBasket(el: IData) {
 
-    const { removeProduct } = useProduct()
+    const { removeProduct, addCountOfProduct, removeCountOfProduct } = useProduct()
 
     return (
         <>
-            <ListItem key={el.id} secondaryAction={<IconButton aria-label="delete" size="small" onClick={()=>removeProduct(el.id)}>
+            <ListItem key={el.id} secondaryAction={<IconButton aria-label="delete" size="small" onClick={() => removeProduct(el.id)}>
                 <DeleteIcon fontSize="small" color='error' />
             </IconButton>}>
                 <Card sx={{ maxWidth: 200, display: "flex" }}>
@@ -40,11 +40,11 @@ export default function ItemBasket(el: IData) {
                         </Typography>
                     </CardContent>
                 </Card>
-                <IconButton>
+                <IconButton onClick={() => addCountOfProduct(el.id)}>
                     <ControlPointIcon />
                 </IconButton>
                 <ListItemText primary={el.count} />
-                <IconButton>
+                <IconButton onClick={() => removeCountOfProduct(el.id)}>
                     <RemoveCircleOutlineIcon />
                 </IconButton>
             </ListItem>

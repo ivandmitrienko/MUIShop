@@ -28,20 +28,34 @@ export const ProductContextProvider = ({ children }: IProductContextProvider) =>
   const addProduct = (product: IData) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: [...prev.products, {...product,count:1}]
+      products: [...prev.products, { ...product, count: 1 }]
     }
     ))
   }
 
-  const removeProduct = (id:number) => {
+  const removeProduct = (id: number) => {
     setProductsToCart((prev) => ({
       ...prev,
       products: prev.products.filter((el) => el.id !== id)
     }))
   }
 
+  const addCountOfProduct = (id: number) => {
+    setProductsToCart((prev) => ({
+      ...prev,
+      products: prev.products.map((el) => el.id === id ? { ...el, count: Number(el.count) + 1 } : { ...el })
+    }))
+  }
+
+  const removeCountOfProduct = (id: number) => {
+    setProductsToCart((prev) => ({
+      ...prev,
+      products: prev.products.map((el) => el.id === id && el.count ? { ...el, count: Number(el.count) - 1 } : { ...el })
+    }))
+  }
+
   return (
-    <ProductContext.Provider value={{ addProduct, removeProduct, ...products }}>
+    <ProductContext.Provider value={{ addProduct, removeProduct, addCountOfProduct, removeCountOfProduct, ...products }}>
       {children}
     </ProductContext.Provider>
   )
