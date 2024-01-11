@@ -19,14 +19,12 @@ export const Layout: FC<IProps> = ({ data, loading }) => {
                 sx={{ backgroundColor: "none", mb: '1.5rem' }}
             />
             <Grid container justifyContent="center" spacing={2}>
-                <div>
-                    {loading && 
-                    <h1 style={{ height: '100vh' }}>Loading...</h1>}
-                </div>
-                {data.map((el) => <Grid item key={el.id} >
-                    <Product {...el} />
-                </Grid>)}
+                {loading ? <h1 style={{ height: '100vh' }}>Loading...</h1>:
+                    data.map((el) => <Grid item key={el.id} >
+                        <Product {...el} />
+                    </Grid>) 
+                }
             </Grid>
         </Container>
-    )
+    )   
 }

@@ -1,9 +1,9 @@
 import { createContext } from "react";
-import { IData, productID } from "../types/types";
+import { IData } from "../types/types";
 
 interface IContext {
     addProduct: (product:IData) => void,
-    removeProduct: ({id}:productID) => void,
+    removeProduct: (id:number) => void,
     products: IData[]
 }
 

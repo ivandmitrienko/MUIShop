@@ -4,7 +4,6 @@ export interface IData {
     price:string,
     category: string,
     description: string,
-    image: string
+    image: string,
+    count?:number
 }
-
-export type productID =Pick<IData,"id">

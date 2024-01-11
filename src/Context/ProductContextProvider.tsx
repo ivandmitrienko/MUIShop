@@ -1,5 +1,5 @@
-import React, { ReactNode, useContext, useState } from 'react';
-import { IData, productID } from '../types/types';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import { IData } from '../types/types';
 import { ProductContext } from './ProductContext';
 
 interface IProductContextProvider {
@@ -9,26 +9,34 @@ interface ILocalStorage {
   products: IData[] | []
 }
 
+const initProducts = {
+  products: []
+}
+
 const getInitialState = () => {
   const products = localStorage.getItem("products");
-  return products ? JSON.parse(products) : [];
+  return products ? JSON.parse(products) : initProducts;
 }
 
 export const ProductContextProvider = ({ children }: IProductContextProvider) => {
   const [products, setProductsToCart] = useState<ILocalStorage>(getInitialState)
-  
+
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products))
+  }, [products])
+
   const addProduct = (product: IData) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: [...prev.products, product]
-    }))
-    console.log('fuck')
+      products: [...prev.products, {...product,count:1}]
+    }
+    ))
   }
 
-  const removeProduct = ({id}:productID) => {
+  const removeProduct = (id:number) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: prev.products.filter((el)=>el.id!==id)
+      products: prev.products.filter((el) => el.id !== id)
     }))
   }
 
@@ -39,4 +47,4 @@ export const ProductContextProvider = ({ children }: IProductContextProvider) =>
   )
 }
 
-export const useProduct = () =>useContext(ProductContext)
+export const useProduct = () => useContext(ProductContext)
