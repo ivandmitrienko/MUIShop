@@ -27,7 +27,7 @@ export const Basket = ({ closeCart, cartOpen }: IDrawer) => {
           <ListItemText primary="Cart Shopping" sx={{ ml: "20px" }} />
         </ListItem>
         <Divider/>
-        {products.map((e)=><ItemBasket {...e}/>)}
+        {products.map((e)=><ItemBasket key={e.id} {...e}/>)}
         <Divider/>
         <Typography variant='h6' sx={{textAlign:'center'}}>
           {products.length ? 
