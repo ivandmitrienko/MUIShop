@@ -1,6 +1,8 @@
-import React, { ReactNode, useContext, useEffect, useState } from 'react';
-import { IData } from '../types/types';
 import { ProductContext } from './ProductContext';
+
+import { IData } from '../types/types';
+
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 
 interface IProductContextProvider {
   children: ReactNode
@@ -10,49 +12,53 @@ interface ILocalStorage {
 }
 
 const initProducts = {
-  products: []
-}
+  products: [],
+};
 
 const getInitialState = () => {
-  const products = localStorage.getItem("products");
+  const products = localStorage.getItem('products');
   return products ? JSON.parse(products) : initProducts;
-}
+};
 
 export const ProductContextProvider = ({ children }: IProductContextProvider) => {
-  const [products, setProductsToCart] = useState<ILocalStorage>(getInitialState)
+  const [products, setProductsToCart] = useState<ILocalStorage>(getInitialState);
 
   useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products))
-  }, [products])
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products]);
 
   const addProduct = (product: IData) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: [...prev.products, { ...product, count: 1 }]
+      products: [...prev.products, { ...product, count: 1 }],
     }
-    ))
-  }
+    ));
+  };
 
   const removeProduct = (id: number) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: prev.products.filter((el) => el.id !== id)
-    }))
-  }
+      products: prev.products.filter((el) => el.id !== id),
+    }));
+  };
 
   const addCountOfProduct = (id: number) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: prev.products.map((el) => el.id === id ? { ...el, count: Number(el.count) + 1 } : { ...el })
-    }))
-  }
+      products: prev.products.map((el) => el.id === id ? { ...el, count: Number(el.count) + 1 } : { ...el }),
+    }));
+  };
 
   const removeCountOfProduct = (id: number) => {
     setProductsToCart((prev) => ({
       ...prev,
-      products: prev.products.map((el) => el.id === id && (Number(el.count) > 1) ? { ...el, count: Number(el.count) - 1 } : { ...el })
-    }))
-  }
+      products: 
+      prev.products
+        .map((el) => el.id === id && (Number(el.count) > 1) ? 
+          { ...el, count: Number(el.count) - 1 } : 
+          { ...el }),
+    }));
+  };
 
   return (
     <ProductContext.Provider
@@ -61,11 +67,11 @@ export const ProductContextProvider = ({ children }: IProductContextProvider) =>
         removeProduct,
         addCountOfProduct,
         removeCountOfProduct,
-        ...products
+        ...products,
       }}>
       {children}
     </ProductContext.Provider>
-  )
-}
+  );
+};
 
-export const useProduct = () => useContext(ProductContext)
+export const useProduct = () => useContext(ProductContext);

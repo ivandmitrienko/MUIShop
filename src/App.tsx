@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from 'react';
 import { Header } from './components/Header';
 import { Layout } from './components/Layout';
-import { IData, } from './types/types';
+import { IData } from './types/types';
 import { Basket } from './components/Basket';
 import Footer from './components/Footer';
 import { ProductContextProvider } from './Context/ProductContextProvider';
 import Snack from './components/Snack';
 
+import React, { useEffect, useState } from 'react';
+
 function App() {
-  const [data, setData] = useState<IData[]>([])
-  const [loading, setLoading] = useState<boolean>(false)
-  const [isCartOpen, setCartOpen] = useState<boolean>(false)
-  const [isSnackOpen, setSnackOpen] = useState<boolean>(false)
+  const [data, setData] = useState<IData[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [isCartOpen, setCartOpen] = useState<boolean>(false);
+  const [isSnackOpen, setSnackOpen] = useState<boolean>(false);
 
   const toggleDrawer = () => {
-    setCartOpen(false)
-  }
+    setCartOpen(false);
+  };
 
   const cartOpen = () => {
-    setCartOpen(!isCartOpen)
-  }
+    setCartOpen(!isCartOpen);
+  };
 
   useEffect(() => {
     setLoading(true);
     fetch('https://fakestoreapi.com/products')
       .then(res => res.json())
       .then((data: IData[]) => setData(data))
-      .finally(() => setLoading(false))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -47,7 +48,7 @@ function App() {
         handleClose={() => setSnackOpen(false)}
       />
     </ProductContextProvider>
-  )
+  );
 }
 
 export default App;

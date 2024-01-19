@@ -1,5 +1,6 @@
-import { createContext } from "react";
-import { IData, productID } from "../types/types";
+import { IData, productID } from '../types/types';
+
+import { createContext } from 'react';
 
 interface IContext {
     addProduct: (product:IData) => void,
@@ -9,4 +10,4 @@ interface IContext {
     products: IData[]
 }
 
-export const ProductContext = createContext<IContext>({} as IContext)
+export const ProductContext = createContext<IContext>({} as IContext);
